@@ -6459,7 +6459,7 @@ def main_window(values_rank_src, values_unit_src, awaId, result_law, seq):
 	description_label1 = tk.Label(tab7, text="Зручний облік нагород і нагороджених.", bg='#d9d9d9', fg="black")
 	description_label1.pack()
 
-	description_label2 = tk.Label(tab7, text="2023-2024, Холодов О.В.", width=113, bg='#d9d9d9', fg="black")
+	description_label2 = tk.Label(tab7, text="2023-2024, Холодов О.В. GPL2.0", width=113, bg='#d9d9d9', fg="black")
 	description_label2.pack()
 
 
