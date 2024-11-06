@@ -1,0 +1,60 @@
+linux
+
+-------------
+    python -m nuitka awards_v2.py --windows-disable-console --onefile --enable-plugin=tk-inter
+
+    # запускати з python 3.11 поки не наладять 3.12
+    python3.11 -m venv enw311
+    cd ~
+    source enw311/bin/activate
+    cp /путь/к/файлу/awards_v3.py ~/awards_v3.py
+    (enw311) [o@o]$ python3.11 ./awards_v3.py
+    (enw311) [o@o]$ python3.11 -m nuitka awards_v3.py --windows-disable-console --onefile --enable-plugin=tk-inter -j2
+
+    ----- Slackware 15
+    python3.9 -m nuitka awards_v39.py --windows-disable-console --onefile --enable-plugin=tk-inter --tcl-library-dir=/usr/lib64 --tk-library-dir=/usr/lib64 -j2
+
+
+windows
+
+-------------
+    python -m nuitka awards_v3.py --windows-disable-console --onefile --enable-plugin=tk-inter --windows-icon-from-ico=icon.ico
+
+
+wine
+
+    # Обновление пакетов и установка Wine
+
+    # Скачивание и установка Python 3.11 для Windows через Wine
+    wget https://www.python.org/ftp/python/3.11.0/python-3.11.0-amd64.exe
+    wine python-3.11.0-amd64.exe /quiet InstallAllUsers=1 PrependPath=1
+
+    # Установка Nuitka и зависимостей через Wine
+    wine python -m pip install nuitka
+    wine python -m pip install wheel
+    wine python -m pip install setuptools
+    wine python -m pip install scons
+
+    # Установка всех компонентов MinGW-w64
+    sudo pacman -S zenity mingw-w64-binutils mingw-w64-crt mingw-w64-gcc mingw-w64-headers mingw-w64-winpthreads
+
+    # установка DLL
+    sudo pacman -S winetricks
+    sudo pacman -S cabextract
+    winetriks mcf42
+    cd где/лежит/mcf42.dll
+    wine regsvr32 MFC42.dll
+
+    # Компиляция скрипта в исполняемый файл
+    wine python -m nuitka awards_v3.py --mingw64 --standalone --windows-disable-console --onefile --enable-plugin=tk-inter --windows-icon-from-ico=icon.ico -j2
+
+    # или так   
+    wine python -m nuitka awards_v3.9.py --mingw64 --standalone --windows-console-mode=disable --onefile --enable-plugin=tk-inter --windows-icon-from-ico=icon.ico -j2
+
+
+-------------
+    # команда wine для PyInstaller для windows 7
+    WINEARCH=win32 WINEPREFIX=~/.wine/32 wine python.exe -m PyInstaller --onefile --windowed --icon=icon.ico awards_v3.py
+
+    # команда wine для Nuitka для windows 7
+    WINEARCH=win32 WINEPREFIX=~/.wine/32 wine python.exe -m nuitka awards_v3.py --mingw64 --standalone --windows-disable-console --onefile --enable-plugin=tk-inter --windows-icon-from-ico=icon.ico -j2
